@@ -1,7 +1,3 @@
-export default function Header() {
-  return (
-    <header className="header">
-      <div className="header__top"></div>
-    </header>
-  );
+export default function Header({ children }: { children: React.ReactNode }) {
+  return <header className="header">{children}</header>;
 }
