@@ -26,3 +26,9 @@ export interface SingleJob extends Iobj{
   coverImgURL: string;
   companyURL: string;
 }
+
+
+export interface IuseJobItems {
+  public: boolean
+  jobItem:SingleJob
+}

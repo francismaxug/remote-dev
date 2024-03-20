@@ -12,14 +12,25 @@ import SortingControls from "./SortingControls";
 import BookmarksButton from "./BookmarksButton";
 import Logo from "./Logo";
 import SearchForm from "./SearchForm";
-import { useJobItems, useSingleJob } from "../hooks/useJobItems";
+import {
+  useDebounceSerach,
+  useJobItems,
+  useSingleJob,
+} from "../hooks/useJobItems";
 import { useActiveId } from "../hooks/useActiveId";
+import { useState } from "react";
 
 function App() {
-  const { search, setSearch, isLoading, jobItemSliced } = useJobItems();
+  const [search, setSearch] = useState("");
+  const debounceSearchText = useDebounceSerach(search);
+  const {jobItems, isLoadingI  } =
+    useJobItems(debounceSearchText);
   const activeId = useActiveId();
- const {isLoadingI,singleJobItem} =  useSingleJob(activeId);
- console.log(singleJobItem)
+  const jobItemSliced = jobItems.slice(0, 7);
+  const totalNomOfItems = jobItems.length;
+  const { isLoading, singleJobItem } = useSingleJob(activeId);
+  console.log(singleJobItem);
+
   return (
     <>
       <Background />
@@ -33,13 +44,13 @@ function App() {
       <Container>
         <Sidebar>
           <div className="sidebar__top">
-            <ResultsCount />
+            <ResultsCount totalNomOfItems={totalNomOfItems} />
             <SortingControls />
           </div>
-          <JobList jobItems={jobItemSliced} isLoading={isLoading} />
+          <JobList jobItems={jobItemSliced} isLoading={isLoadingI} />
           <PaginationControls />
         </Sidebar>
-        <JobItemContent singleJob={singleJobItem} isLoading={isLoadingI} />
+        <JobItemContent singleJob={singleJobItem || null} isLoading={isLoading} />
       </Container>
       <Footer />
     </>

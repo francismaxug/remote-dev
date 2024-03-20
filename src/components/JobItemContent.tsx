@@ -9,46 +9,50 @@ export default function JobItemContent({
   singleJob: SingleJob | null;
   isLoading: boolean;
 }) {
+  console.log(isLoading);
+  if(isLoading) return <Spinner/>
   if (!singleJob) return <EmptyJobContent />;
-  if (isLoading) return <Spinner />;
+  
   return (
+    <>
+  
     <section className="job-details">
       <div>
         <img
-          src={singleJob.coverImgURL}
+          src={singleJob?.coverImgURL}
           alt="#"
         />
 
-        <a className="apply-btn" href={singleJob.companyURL} target="_blank">
+        <a className="apply-btn" href={singleJob?.companyURL} target="_blank">
           Apply
         </a>
 
         <section className="job-info">
           <div className="job-info__left">
-            <div className="job-info__badge">{singleJob.badgeLetters}</div>
+            <div className="job-info__badge">{singleJob?.badgeLetters}</div>
             <div className="job-info__below-badge">
-              <time className="job-info__time">{singleJob.daysAgo}d</time>
+              <time className="job-info__time">{singleJob?.daysAgo}d</time>
 
               <BookmarkIcon />
             </div>
           </div>
 
           <div className="job-info__right">
-            <h2 className="second-heading">{singleJob.title}</h2>
-            <p className="job-info__company">{singleJob.company}</p>
-            <p className="job-info__description">{singleJob.description}</p>
+            <h2 className="second-heading">{singleJob?.title}</h2>
+            <p className="job-info__company">{singleJob?.company}</p>
+            <p className="job-info__description">{singleJob?.description}</p>
             <div className="job-info__extras">
               <p className="job-info__extra">
                 <i className="fa-solid fa-clock job-info__extra-icon"></i>
-                {singleJob.duration}
+                {singleJob?.duration}
               </p>
               <p className="job-info__extra">
                 <i className="fa-solid fa-money-bill job-info__extra-icon"></i>
-                {singleJob.salary}
+                {singleJob?.salary}
               </p>
               <p className="job-info__extra">
                 <i className="fa-solid fa-location-dot job-info__extra-icon"></i>{" "}
-                {singleJob.location}
+                {singleJob?.location}
               </p>
             </div>
           </div>
@@ -63,7 +67,7 @@ export default function JobItemContent({
               </p>
             </div>
             <ul className="qualifications__list">
-              {singleJob.qualifications.map((q) => (
+              {singleJob?.qualifications.map((q) => (
                 <li key={q} className="qualifications__item">
                   {q}
                 </li>
@@ -79,7 +83,7 @@ export default function JobItemContent({
               </p>
             </div>
             <ul className="reviews__list">
-              {singleJob.reviews.map((q) => (
+              {singleJob?.reviews.map((q) => (
                 <li key={q} className="reviews__item">
                   {q}
                 </li>
@@ -97,6 +101,7 @@ export default function JobItemContent({
         </footer>
       </div>
     </section>
+    </>
   );
 }
 

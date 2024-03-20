@@ -1,3 +1,4 @@
+import { useActiveId } from "../hooks/useActiveId";
 import BookmarkIcon from "./BookmarkIcon";
 import Spinner from "./Spinner";
 import { Iobj } from "./types";
@@ -9,10 +10,13 @@ export default function JobListItem({
   items: Iobj;
   isLoading: boolean;
 }) {
+  const activeId = useActiveId();
   if (isLoading) return <Spinner />;
 
   return (
-    <li className="job-item">
+    <li
+      className={`job-item ${items.id === activeId ? "job-item--active" : ""}`}
+    >
       <a href={`#${items.id}`} className="job-item__link">
         <div className="job-item__badge">{items.badgeLetters}</div>
 
