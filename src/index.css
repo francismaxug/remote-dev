@@ -1008,12 +1008,30 @@ body::-webkit-scrollbar {
 }
 
 /* SPINNER */
+
 .spinner {
+  display: "flex";
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  justify-content: space-between;
+  align-items: center;
+  height: "100vh";
+  border-radius: 50%;
+  animation: spinner 1s infinite linear;
+  width: 85px;
+  height: 85px;
+  border-top: 5px solid #e2e7e9;
+  border-right: 5px solid #e2e7e9;
+  border-bottom: 5px solid #e2e7e9;
+  border-left: 5px solid #ccd1d3;
+}
+.spinner1 {
   position: absolute;
   border-radius: 50%;
   animation: spinner 1s infinite linear;
-  left: 50%;
-  top: 18%;
+  left: 57%;
+  top: 44%;
   width: 85px;
   height: 85px;
   border-top: 5px solid #e2e7e9;

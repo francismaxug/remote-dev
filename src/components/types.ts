@@ -16,7 +16,7 @@ export interface Iresponse {
   isLoading: boolean;
 }
 
-export interface SingleJob extends Iobj{
+export interface SingleJob extends Iobj {
   description: string;
   qualifications: string[];
   reviews: string[];
@@ -27,8 +27,13 @@ export interface SingleJob extends Iobj{
   companyURL: string;
 }
 
-
 export interface IuseJobItems {
-  public: boolean
-  jobItem:SingleJob
+  public: boolean;
+  jobItem: SingleJob;
+}
+
+export interface IuseFetchJob {
+  sorted: boolean;
+  public: boolean;
+  jobItems: Iobj[];
 }

@@ -1,17 +1,17 @@
 import { useActiveId } from "../hooks/useActiveId";
 import BookmarkIcon from "./BookmarkIcon";
-import Spinner from "./Spinner";
 import { Iobj } from "./types";
 
 export default function JobListItem({
   items,
-  isLoading,
+
 }: {
   items: Iobj;
-  isLoading: boolean;
+  
 }) {
   const activeId = useActiveId();
-  if (isLoading) return <Spinner />;
+
+
 
   return (
     <li

@@ -19,18 +19,19 @@ import {
 } from "../hooks/useJobItems";
 import { useActiveId } from "../hooks/useActiveId";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [search, setSearch] = useState("");
   const debounceSearchText = useDebounceSerach(search);
-  const {jobItems, isLoadingI  } =
-    useJobItems(debounceSearchText);
+  const { jobItems, isLoadingI } = useJobItems(debounceSearchText);
   const activeId = useActiveId();
-  const jobItemSliced = jobItems.slice(0, 7);
-  const totalNomOfItems = jobItems.length;
+  const jobItemSliced = jobItems?.slice(0, 7) || [];
+  const totalNomOfItems = jobItems?.length || 0;
   const { isLoading, singleJobItem } = useSingleJob(activeId);
   console.log(singleJobItem);
-
+  console.log(jobItems);
+  console.log(isLoadingI);
   return (
     <>
       <Background />
@@ -50,9 +51,13 @@ function App() {
           <JobList jobItems={jobItemSliced} isLoading={isLoadingI} />
           <PaginationControls />
         </Sidebar>
-        <JobItemContent singleJob={singleJobItem || null} isLoading={isLoading} />
+        <JobItemContent
+          singleJob={singleJobItem || null}
+          isLoading={isLoading}
+        />
       </Container>
       <Footer />
+      <Toaster position="top-right"/>
     </>
   );
 }
