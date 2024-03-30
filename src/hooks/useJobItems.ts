@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { IuseFetchJob, IuseJobItems } from "../components/types";
+import { IuseFetchJob, IuseJobItems, SingleJob } from "../components/types";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { handleError } from "../utils";
 import { BookMrksCon } from "../contexts/BookmarksContext";
@@ -149,7 +149,10 @@ export function useJobItems(ids: number[]) {
   });
   const isLoadingI = data.some((d) => d.isLoading);
   console.log(data);
-  const jobItems = data.map((d) => d.data?.jobItem).filter(p=>p!==undefined) 
+  const jobItems = data
+    .map((d) => d.data?.jobItem)
+    // .filter((p) => !!p) as SingleJob[];//this works same as below
+    .filter((p) => Boolean(p)) as SingleJob[];
   return { jobItems, isLoadingI } as const;
 }
 

@@ -1,12 +1,12 @@
 import { createContext } from "react";
 import { useStorage } from "../hooks/useLocalStorage";
 import { useJobItems } from "../hooks/useJobItems";
-import { Iobj } from "../components/types";
+import { SingleJob } from "../components/types";
 
 type BkMarks = {
   bookmarksId: number[];
   handleToggleBookmark: (id: number) => void;
-  bookMarksJobItems: Iobj[] | undefined;
+  bookMarksJobItems: SingleJob[];
   isLoadingI: boolean;
 };
 
