@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { IuseFetchJob, IuseJobItems } from "../components/types";
-import { useQuery } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import { handleError } from "../utils";
+import { BookMrksCon } from "../contexts/BookmarksContext";
 
 const BaseUrl = "https://bytegrad.com/course-assets/projects/rmtdev/api/data";
 // export function useJobItems(search: string) {
@@ -47,7 +48,7 @@ const secondFetch = async (search: string): Promise<IuseFetchJob> => {
   console.log(data);
   return data;
 };
-export function useJobItems(search: string) {
+export function useSearchQuery(search: string) {
   // const [isLoadingI, setIsLoading] = useState(false);
   // const [jobItems, setJobItems] = useState<Iobj[]>([] as Iobj[]);
   const { data, isInitialLoading } = useQuery(
@@ -58,14 +59,11 @@ export function useJobItems(search: string) {
       staleTime: 1000 * 60 * 60,
       refetchOnWindowFocus: false,
       retry: false,
-      onError: (error) => {
-        toast.error(error.message);
-      },
+      onError: handleError,
     }
   );
   const jobItems = data?.jobItems;
   const isLoadingI = isInitialLoading;
-  console.log(isLoadingI);
   return { jobItems, isLoadingI } as const;
 }
 
@@ -117,12 +115,9 @@ export function useSingleJob(activeId: number | null) {
       enabled: !!activeId, //or Boolean(activeId)
       refetchOnWindowFocus: false,
       retry: false,
-      onError: (error) => {
-        console.log(error);
-      },
+      onError: handleError,
     }
   );
-  console.log(data);
   const singleJobItem = data?.jobItem;
   const isLoading = isInitialLoading;
   return { singleJobItem, isLoading } as const;
@@ -138,4 +133,30 @@ export function useDebounceSerach<T>(value: T, delay = 500): T {
   }, [value, delay]);
 
   return debounceSearchText;
+}
+//-----------------------------------------------------
+
+export function useJobItems(ids: number[]) {
+  const data = useQueries({
+    queries: ids.map((id) => ({
+      queryKey: ["job-item", id],
+      queryFn: () => fetchFxn(id),
+      staleTime: 1000 * 60 * 60,
+      refetchOnWindowFocus: false,
+      retry: false,
+      onError: handleError,
+    })),
+  });
+  const isLoadingI = data.some((d) => d.isLoading);
+  console.log(data);
+  const jobItems = data.map((d) => d.data?.jobItem).filter(p=>p!==undefined) 
+  return { jobItems, isLoadingI } as const;
+}
+
+//-----------------------------------------------------
+export function useBokkmark() {
+  const context = useContext(BookMrksCon);
+  if (!context)
+    throw new Error("You have called the contextin the wrong place");
+  return context;
 }

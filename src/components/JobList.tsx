@@ -2,7 +2,6 @@ import JobListItem from "./JobListItem";
 import { Iresponse } from "./types";
 
 export function JobList({ jobItems, isLoading }: Iresponse) {
-  console.log(isLoading);
   // if (isLoading) return <div style={{
   //   display: "flex",
   //   justifyContent: "center",

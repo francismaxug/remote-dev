@@ -1,3 +1,11 @@
+import { useBokkmark } from "../hooks/useJobItems";
+import JobList from "./JobList";
+
 export default function BookmarksPopover() {
-  return <div className="bookmarks-popover"></div>;
+  const { bookMarksJobItems, isLoadingI } = useBokkmark();
+  return (
+    <div className="bookmarks-popover">
+      <JobList jobItems={bookMarksJobItems} isLoading={isLoadingI} />
+    </div>
+  );
 }

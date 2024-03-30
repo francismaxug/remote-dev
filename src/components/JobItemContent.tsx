@@ -9,7 +9,6 @@ export default function JobItemContent({
   singleJob: SingleJob | null;
   isLoading: boolean;
 }) {
-  console.log(isLoading);
   if(isLoading) return <Spinner/>
   if (!singleJob) return <EmptyJobContent />;
   
@@ -33,7 +32,7 @@ export default function JobItemContent({
             <div className="job-info__below-badge">
               <time className="job-info__time">{singleJob?.daysAgo}d</time>
 
-              <BookmarkIcon />
+              <BookmarkIcon id={singleJob.id} />
             </div>
           </div>
 
