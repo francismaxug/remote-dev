@@ -1,27 +1,24 @@
-export default function SortingControls({
-  sortedby,
-  handlesort,
-}: {
-  sortedby: string;
-  handlesort: () => void;
-}) {
+import { useJobItemsContext } from "../hooks/useJobItems";
+
+export default function SortingControls() {
+  const { sortedBy, handleSortedBy } = useJobItemsContext();
   return (
     <section className="sorting">
       <i className="fa-solid fa-arrow-down-short-wide"></i>
 
       <button
-        onClick={handlesort}
+        onClick={handleSortedBy}
         className={`sorting__button sorting__button--relevant ${
-          sortedby === "relevant" ? "sorting__button--active" : ""
+          sortedBy === "relevant" ? "sorting__button--active" : ""
         }`}
       >
         Relevant
       </button>
 
       <button
-        onClick={handlesort}
+        onClick={handleSortedBy}
         className={`sorting__button sorting__button--recent ${
-          sortedby === "recent" ? "sorting__button--active" : ""
+          sortedBy === "recent" ? "sorting__button--active" : ""
         } `}
       >
         Recent

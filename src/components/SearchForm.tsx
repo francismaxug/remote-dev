@@ -1,8 +1,11 @@
+import { useSearchTextContext } from "../hooks/useJobItems";
+
 interface SearchForm {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
-export default function SearchForm({ search, setSearch }: SearchForm) {
+export default function SearchForm() {
+  const {search, setSearch} = useSearchTextContext()
   return (
     <form
       onSubmit={(e) => {

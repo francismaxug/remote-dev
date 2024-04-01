@@ -1,4 +1,4 @@
-import { useActiveId } from "../hooks/useActiveId";
+import { useActiveIdContext } from "../hooks/useJobItems";
 import BookmarkIcon from "./BookmarkIcon";
 import { Iobj } from "./types";
 
@@ -9,7 +9,7 @@ export default function JobListItem({
   items: Iobj;
   
 }) {
-  const activeId = useActiveId();
+  const { activeId } = useActiveIdContext();
 
 
 

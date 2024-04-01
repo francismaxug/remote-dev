@@ -3,6 +3,10 @@ import { IuseFetchJob, IuseJobItems, SingleJob } from "../components/types";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { handleError } from "../utils";
 import { BookMrksCon } from "../contexts/BookmarksContext";
+import { ActiveIdContext } from "../contexts/ActiveIdContext";
+import { SearchTextContext } from "../contexts/SerchTextContext";
+import JobItemContent from "../components/JobItemContent";
+import { JobItemContext } from "../contexts/JobItemsContext";
 
 const BaseUrl = "https://bytegrad.com/course-assets/projects/rmtdev/api/data";
 // export function useJobItems(search: string) {
@@ -156,9 +160,51 @@ export function useJobItems(ids: number[]) {
   return { jobItems, isLoadingI } as const;
 }
 
+//=====================================
+
+export function useOnClickOutside(
+  refs: React.RefObject<HTMLElement>[],
+  handler: () => void
+) {
+  console.log("useOnClickOutside");
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        event.target instanceof HTMLElement &&
+        refs.every((ref) => !ref.current?.contains(event.target as Node))
+      ) {
+        handler();
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [refs, handler]);
+}
+
 //-----------------------------------------------------
 export function useBokkmark() {
   const context = useContext(BookMrksCon);
+  if (!context)
+    throw new Error("You have called the contextin the wrong place");
+  return context;
+}
+
+export function useActiveIdContext() {
+  const context = useContext(ActiveIdContext);
+  if (!context)
+    throw new Error("You have called the contextin the wrong place");
+  return context;
+}
+export function useSearchTextContext() {
+  const context = useContext(SearchTextContext);
+  if (!context)
+    throw new Error("You have called the context at the wrong place");
+  return context;
+}
+
+export function useJobItemsContext() {
+  const context = useContext(JobItemContext);
   if (!context)
     throw new Error("You have called the contextin the wrong place");
   return context;
