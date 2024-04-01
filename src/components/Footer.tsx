@@ -4,9 +4,10 @@ export default function Footer() {
       <small>
         <p>
           © Copyright by{" "}
-          <a href="https://bytegrad.com" target="_blank">
+          <a href="https://francis-max.netlify.app" target="_blank">
             francis-max.netlify.app
-          </a>
+          </a>{" "}
+          {""}
           still learning
         </p>
       </small>
