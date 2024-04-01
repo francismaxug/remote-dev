@@ -1,12 +1,12 @@
 import { createContext } from "react";
 import { useStorage } from "../hooks/useLocalStorage";
 import { useJobItems } from "../hooks/useJobItems";
-import { SingleJob } from "../components/types";
+import {  SingleJob } from "../components/types";
 
 type BkMarks = {
   bookmarksId: number[];
   handleToggleBookmark: (id: number) => void;
-  bookMarksJobItems: SingleJob[];
+  bookMarksJobItems: SingleJob[] 
   isLoadingI: boolean;
 };
 
@@ -17,14 +17,14 @@ export default function BookmarksContext({
 }: {
   children: React.ReactNode;
 }) {
-  const [bookmarksId, setBookmarksId] = useStorage<number[]>("bookmarks", []);
+  const {bookmarksId, setBookmarksId} = useStorage<number[]>("bookmarks", []);
   const { jobItems: bookMarksJobItems, isLoadingI } = useJobItems(bookmarksId);
 
   const handleToggleBookmark = (id: number) => {
     if (bookmarksId.includes(id)) {
-      setBookmarksId((pre) => pre.filter((item) => item !== id));
+      setBookmarksId((pre: number[]) => pre.filter((item: number) => item !== id));
     } else {
-      setBookmarksId((pre) => [...pre, id]);
+      setBookmarksId((pre: number[]) => [...pre, id]);
     }
   };
   return (

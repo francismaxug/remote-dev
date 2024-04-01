@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-export function useStorage<T>(key: string, initialValue: T):[T,  React.Dispatch<React.SetStateAction<T>>] {
-  const [value, setValue] = useState(() => {
+export function useStorage<T>(key: string, initialValue: T) {
+  const [bookmarksId, setBookmarksId] = useState(() => {
     const items = localStorage.getItem(key);
+    console.log(items);
     return items ? JSON.parse(items) : JSON.stringify(initialValue);
   });
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-  return [value, setValue] as const;
+    localStorage.setItem(key, JSON.stringify(bookmarksId));
+  }, [key, bookmarksId]);
+  return { bookmarksId, setBookmarksId };
 }

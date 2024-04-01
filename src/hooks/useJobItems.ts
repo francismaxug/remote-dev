@@ -5,7 +5,6 @@ import { handleError } from "../utils";
 import { BookMrksCon } from "../contexts/BookmarksContext";
 import { ActiveIdContext } from "../contexts/ActiveIdContext";
 import { SearchTextContext } from "../contexts/SerchTextContext";
-import JobItemContent from "../components/JobItemContent";
 import { JobItemContext } from "../contexts/JobItemsContext";
 
 const BaseUrl = "https://bytegrad.com/course-assets/projects/rmtdev/api/data";

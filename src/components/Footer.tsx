@@ -5,9 +5,9 @@ export default function Footer() {
         <p>
           © Copyright by{" "}
           <a href="https://bytegrad.com" target="_blank">
-            ByteGrad.com
+            francis-max.netlify.app
           </a>
-          . Intended for learning or your portfolio.
+          still learning
         </p>
       </small>
 
